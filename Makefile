@@ -2,7 +2,7 @@
 
 OUT_DIR := public/
 
-INPUTS := index.rkt about.rkt projects.rkt
+INPUTS := index.rkt about.rkt projects.rkt blog.rkt
 STYLES := $(OUT_DIR)/style.css
 OUTPUTS := $(addprefix $(OUT_DIR), $(patsubst  %.rkt, %.html, $(INPUTS)))
 
