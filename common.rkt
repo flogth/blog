@@ -20,7 +20,8 @@
 
 (define (ll #:href href #:name name #:external [external #f] )
   (if external
-      (a 'href: href 'class: "external" name)
+      (a 'href: href 'class: "external"
+         'target: "_blank" 'rel: "noreferrer" name)
       (a 'href: href name)))
 
 (define (srclink #:name name)
