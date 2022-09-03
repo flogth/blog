@@ -11,7 +11,7 @@
     (h3 "me")
     (p "I am Florian Guthmann, a software developer and computer science student at "
        (abbr 'title: "Friedrich-Alexander-Universität Erlangen-Nürnberg" "FAU") ".")
-    (p "My username " (em "flodobeutlin") " is a (arguably terrible) pun comprised of a portmanteau of " (em "Frodo") " and my nickname " (em "Flo") " as well as " (em "Beutlin") ", the german version of the last name Baggins in LOTR." )
+    (p "My username " (em "flodobeutlin") " is a (arguably terrible) pun comprised of a portmanteau of " (em "Frodo") " and my nickname " (em "Flo") " as well as " (em "Beutlin") ", the german version of the last name Baggins in " (abbr 'title: "Lord Of The Rings" "LOTR") "." )
     (p "Next to this site I also have a "
        (ll #:href "https://wwwcip.cs.fau.de/~oc45ujef" #:name "university website")
        " where I host miscellaneous content related to my studies."))
