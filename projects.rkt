@@ -1,4 +1,4 @@
-#lang racket/base
+#lang at-exp racket/base
 (require "common.rkt"
          scribble/html/html
          (except-in scribble/html/extra
@@ -25,10 +25,11 @@
     #:description "My NixOS system and user configuration"
     #:external #t)))
 
-(define content
-  (list
-   (h2 "projects")
-   (section 'class: "projects"
-            projects)))
+(define-page content "projects.rkt"
+  @h2{projects}
+  (section 'class: "projects"
+           projects))
 
-(output (site content))
+(define default (page "projects.html" content))
+(provide default)
+

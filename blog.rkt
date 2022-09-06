@@ -1,12 +1,12 @@
-#lang racket/base
+#lang at-exp racket/base
 (require "common.rkt"
          scribble/html/html
          (except-in scribble/html/extra
                     output map))
 
-(define content
-  (list
-   (h2 "blog")
-   (p "More to come...")))
+(define-page content "blog.rkt"
+  @h2{blog}
+  @p{More to come...})
 
-(output (site content))
+(define default (page "blog.html" content))
+(provide default)
