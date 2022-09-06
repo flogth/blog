@@ -108,8 +108,10 @@ a:hover {
     border-radius: 2px;
 }
 
+
 .external:after {
-    content: " 🔗";
+    content: "⬀";
+    padding-left: 0.1em;
 }
 
 nav>ul>li:before {
