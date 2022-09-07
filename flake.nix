@@ -16,9 +16,8 @@
             name = "site";
             src = ./.;
             nativeBuildInputs = buildInputs;
-            buildPhase = "make -j $NIX_BUILD_CORES";
             installPhase = ''
-            cp -r public $out
+            ${pkgs.racket}/bin/racket main.rkt -- $out
             cp -r assets $out
             '';
           };

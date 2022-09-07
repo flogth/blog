@@ -8,6 +8,8 @@
 
 (provide (all-defined-out))
 
+(define current-page
+  (make-parameter '()))
 
 (define (css href)
   (link 'rel: "stylesheet" 'type: "text/css" 'href: href))
@@ -16,7 +18,8 @@
   (date-display-format 'iso-8601)
   (date->string (current-date)))
 
-
+(define (debugln s . v)
+  (eprintf "[INFO] ~a\n" (apply format s v)))
 
 (define (ll #:href href #:name name #:external [external #f] )
   (if external
@@ -25,7 +28,7 @@
       (a 'href: href name)))
 
 (define (srclink #:name name)
-  (let ([rkt (find-system-path 'run-file)])
+  (let ([rkt (current-page)])
     (ll #:href rkt #:name name)))
 
 
@@ -63,12 +66,25 @@
 
 
 (define (site content)
-  (html 'lang: "de"
-        mhead
-        (body
-         (mheader)
-         (main content)
-         (mfoot))))
+  (list (doctype 'html)
+        (html 'lang: "de"
+              mhead
+              (body
+               (mheader)
+               (main content)
+               (mfoot)))))
 
-(define (output s)
-  (output-xml (list (doctype 'html) s)))
+(define (output-page dir p)
+  (let ([out (build-path dir (page-path p))])
+    (with-output-to-file out
+      (lambda ()
+        (debugln "Producing ~a" out)
+        (output-xml (site (page-content p))))
+      #:exists 'replace)))
+
+(define-syntax-rule (define-page name title content ...)
+  (define name
+    (parameterize ([current-page title])
+      (list content ...))))
+
+(struct page (path content) #:transparent)
