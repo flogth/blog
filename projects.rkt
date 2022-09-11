@@ -8,7 +8,7 @@
   (article 'class: "project"
            (a 'href: href
               'class: "project-preview"
-              (img 'src: preview))
+              (img 'src: preview 'alt: name))
            (h3 (ll #:href href #:name name #:external external))
            (p desc)))
 
