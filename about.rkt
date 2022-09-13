@@ -4,7 +4,7 @@
          (except-in scribble/html/extra
                     output map))
 
-(define-page content "about.rkt"
+(define-page content
   @h2{about}
   (section
    @h3{me}

@@ -9,7 +9,7 @@
 (provide (all-defined-out))
 
 (define current-page
-  (make-parameter '()))
+  (make-parameter null))
 
 (define (css href)
   (link 'rel: "stylesheet" 'type: "text/css" 'href: href))
@@ -30,7 +30,6 @@
 (define (srclink #:name name)
   (let ([rkt (current-page)])
     (ll #:href rkt #:name name)))
-
 
 (define (pl . ls)
   (p (map (lambda (l) (string-append l "\n")) ls)))
@@ -58,37 +57,41 @@
    (link 'rel: "icon" 'href: "assets/favicon.ico" 'type: "image/x-icon")
    (css "style.css")))
 
-(define mfoot
+(define (mfoot)
   (footer
    (time 'datetime: (now) (now))
    (span author)
    (srclink #:name "Peel slowly and see")))
 
 
-(define (site content)
-  (list (doctype 'html)
-        (html 'lang: "de"
-              mhead
-              (body
-               (mheader)
-               (main content)
-               (mfoot)))))
+(define (site p)
+  (parameterize ([current-page (path-replace-extension (page-path p) ".rkt")])
+    (debugln (path->string (current-page)))
+    (list (doctype 'html)
+          (html 'lang: "de"
+                mhead
+                (body
+                 (mheader)
+                 (main (page-content p))
+                 (mfoot))))))
 
 (define (output-page dir p)
-  (let ([out (build-path dir (page-path p))])
+  (let* ([out (build-path dir (page-path p))]
+         [src (path-replace-extension (page-path p) ".rkt")]
+         [srcout (build-path dir src)])
     (match-let-values ([(d _ _) (split-path out)])
       (unless (directory-exists? d)
         (debugln "Creating output directory \"~a\"" d)
         (make-directory d)))
     (with-output-to-file out
       (lambda ()
-        (debugln "Producing ~a" out)
-        (output-xml (site (page-content p))))
-      #:exists 'replace)))
+        (debugln "Producing ~a" (page-path p))
+        (output-xml (site p)))
+      #:exists 'replace)
+    (debugln "Copying ~a" src)
+    (copy-file src srcout #t)))
 
-(define-syntax-rule (define-page name title content ...)
-  (define name
-    (parameterize ([current-page title])
-      (list content ...))))
+(define-syntax-rule (define-page name content ...)
+  (define name (list content ...)))
 
 (struct page (path content) #:transparent)

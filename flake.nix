@@ -18,6 +18,7 @@
             nativeBuildInputs = buildInputs;
             installPhase = ''
             ${pkgs.racket}/bin/racket main.rkt -- $out
+            cp style.css $out
             cp -r assets $out
             '';
           };

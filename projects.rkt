@@ -25,7 +25,7 @@
     #:description "My NixOS system and user configuration"
     #:external #t)))
 
-(define-page content "projects.rkt"
+(define-page content
   @h2{projects}
   (section 'class: "projects"
            projects))

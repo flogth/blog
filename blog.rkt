@@ -11,7 +11,7 @@
          ;; (all-from-out "posts/test.rkt")
          )
 
-(define-page content "blog.rkt"
+(define-page content
   @h2{blog}
   (ll #:href "posts/test" #:name "test")
   @p{More to come...})

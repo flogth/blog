@@ -2,7 +2,7 @@
 (require "common.rkt"
          scribble/html/html)
 
-(define-page content "index.rkt"
+(define-page content
   @h2{Flo's personal Website}
   @p{Hi, this is my personal site.
          The goal for this site is to be an outlet for writing about things I find interesting.
