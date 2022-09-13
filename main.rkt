@@ -19,3 +19,6 @@
 (output-page out-dir blog/default)
 (output-page out-dir projects/default)
 (output-page out-dir about/default)
+
+;; posts
+;; (output-page out-dir blog/test/default)

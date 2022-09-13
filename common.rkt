@@ -62,7 +62,7 @@
   (footer
    (time 'datetime: (now) (now))
    (span author)
-   (srclink #:name "src")))
+   (srclink #:name "Peel slowly and see")))
 
 
 (define (site content)
@@ -76,6 +76,10 @@
 
 (define (output-page dir p)
   (let ([out (build-path dir (page-path p))])
+    (match-let-values ([(d _ _) (split-path out)])
+      (unless (directory-exists? d)
+        (debugln "Creating output directory \"~a\"" d)
+        (make-directory d)))
     (with-output-to-file out
       (lambda ()
         (debugln "Producing ~a" out)
