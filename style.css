@@ -73,6 +73,27 @@ header {
     margin-left: 1rem;
 }
 
+#skiptocontent {
+    position: fixed;
+    top: -80px;
+    left: 0;
+    padding: 1em;
+    border-radius: 0 0 2px 0;
+    background-color: var(--accent);
+    color: var(--bg);
+    transition: top .1s ease-in;
+}
+
+#skiptocontent:focus {
+    top: 0px;
+}
+
+@media(prefers-reduced-motion) {
+    #skiptocontent {
+        transition: none;
+    }
+}
+
 nav {
     padding: 0;
 }

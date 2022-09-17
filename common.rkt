@@ -42,8 +42,10 @@
         (li (ll #:href "https://github.com/flodobeutlin" #:name "code" #:external #t)))))
 
 (define mheader
-  (header (div 'class: "header-logo" (a 'href: "/" "flodobeutlin"))
-          (mnav)))
+  (header
+   (a 'id: "skiptocontent" 'href: "#main-content" "Skip to main content")
+   (div 'class: "header-logo" (a 'href: "/" "flodobeutlin"))
+   (mnav)))
 (define author "Florian Guthmann")
 
 (define mtitle "Flo's personal Website")
@@ -72,7 +74,9 @@
                 mhead
                 (body
                  (mheader)
-                 (main (page-content p))
+                 (main 'id: "main-content"
+                       'tabindex: -1
+                       (page-content p))
                  (mfoot))))))
 
 (define (output-page dir p)
